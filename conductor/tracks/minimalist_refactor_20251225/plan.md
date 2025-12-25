@@ -11,7 +11,7 @@
     - [ ] Subtask: Edit `_layouts/default.html` to remove any theme-specific classes or links.
     - [ ] Subtask: Add manual meta tags for `title` and `description` to `head`.
     - [ ] Subtask: Ensure link to `assets/css/style.css` is present and correct.
-- [ ] Task: Simplify Content Layouts
+- [x] Task: Simplify Content Layouts 22c4829
     - [ ] Subtask: Review and simplify `_layouts/post.html`.
     - [ ] Subtask: Review and simplify `_layouts/page.html` (if exists, or verify usage in `about.md`).
 - [ ] Task: Refine Custom CSS
