@@ -19,8 +19,8 @@
 - [x] Task: Create About Page b8d5a3e
     - [x] Subtask: Create `about.md` using the page layout (or default).
     - [x] Subtask: Add content describing the blog.
-- [ ] Task: Create Post Layout
-    - [ ] Subtask: Create `_layouts/post.html` for individual articles.
+- [x] Task: Create Post Layout 65f2b9b
+    - [x] Subtask: Create `_layouts/post.html` for individual articles.
 - [ ] Task: Conductor - User Manual Verification 'Content Pages' (Protocol in workflow.md)
 
 ## Phase 3: Final Verification
