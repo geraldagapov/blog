@@ -35,13 +35,16 @@ All tasks follow a strict lifecycle:
 6. **Verify Coverage:** Run coverage reports using the project's chosen tools.
    Target: >80% coverage for new code.
 
-7. **Document Deviations:** If implementation differs from tech stack:
+7. **Verify Build:** Run the build command to ensure the website builds successfully.
+   Command: `bundle exec jekyll build`
+
+8. **Document Deviations:** If implementation differs from tech stack:
    - **STOP** implementation
    - Update `tech-stack.md` with new design
    - Add dated note explaining the change
    - Resume implementation
 
-8. **Commit Code Changes:**
+9. **Commit Code Changes:**
    - Review changes with `jj diff`.
    - Set the commit message:
      ```bash
@@ -52,9 +55,9 @@ All tasks follow a strict lifecycle:
      jj new
      ```
 
-9. **Append Task Summary to Commit:**
-   - **Step 9.1: Draft Note Content:** Create a detailed summary including task name, changes, files modified, and "why".
-   - **Step 9.2: Append to Commit Description:** Update the description of the *just-completed commit* (`@-`) to include the note.
+10. **Append Task Summary to Commit:**
+   - **Step 10.1: Draft Note Content:** Create a detailed summary including task name, changes, files modified, and "why".
+   - **Step 10.2: Append to Commit Description:** Update the description of the *just-completed commit* (`@-`) to include the note.
      ```bash
      # Example: Appending to the previous commit's description
      jj describe @- -m "$(jj log --no-graph -r @- -T description)
@@ -62,15 +65,15 @@ All tasks follow a strict lifecycle:
      Task Summary: <note content>"
      ```
 
-10. **Get and Record Task Commit SHA:**
-    - **Step 10.1: Get Commit Hash:**
+11. **Get and Record Task Commit SHA:**
+    - **Step 11.1: Get Commit Hash:**
       ```bash
       jj log --no-graph -r @- -T "commit_id"
       ```
-    - **Step 10.2: Update Plan:** Read `plan.md`, find the line for the completed task, update its status from `[~]` to `[x]`, and append the first 7 characters of the hash.
-    - **Step 10.3: Write Plan:** Write the updated content back to `plan.md`.
+    - **Step 11.2: Update Plan:** Read `plan.md`, find the line for the completed task, update its status from `[~]` to `[x]`, and append the first 7 characters of the hash.
+    - **Step 11.3: Write Plan:** Write the updated content back to `plan.md`.
 
-11. **Commit Plan Update:**
+12. **Commit Plan Update:**
     - **Action:** Set the message for the plan update:
       ```bash
       jj describe -m "conductor(plan): Mark task '...' as complete"
@@ -100,7 +103,7 @@ All tasks follow a strict lifecycle:
     -   Generate a step-by-step plan (Frontend/Backend specific as needed).
 
 5.  **Await Explicit User Feedback:**
-    -   Ask: "**Does this meet your expectations? Please confirm with yes or provide feedback...**"
+    -   **Ask:** "**Does this meet your expectations? Please confirm with yes or provide feedback...**"
     -   **PAUSE** and await response.
 
 6.  **Create Checkpoint Commit:**
@@ -138,6 +141,7 @@ Before marking any task complete, verify:
 
 - [ ] All tests pass
 - [ ] Code coverage meets requirements (>80%)
+- [ ] Website builds successfully (`bundle exec jekyll build`)
 - [ ] Code follows project's code style guidelines
 - [ ] All public functions/methods are documented
 - [ ] Type safety is enforced
@@ -186,12 +190,13 @@ A task is complete when:
 1. All code implemented to specification
 2. Unit tests written and passing
 3. Code coverage meets requirements
-4. Documentation complete
-5. Code passes linting/analysis
-6. Mobile verified
-7. Implementation notes added to `plan.md`
-8. Changes committed with proper message (`jj describe`, `jj new`)
-9. Task summary appended to commit description
+4. Website builds successfully
+5. Documentation complete
+6. Code passes linting/analysis
+7. Mobile verified
+8. Implementation notes added to `plan.md`
+9. Changes committed with proper message (`jj describe`, `jj new`)
+10. Task summary appended to commit description
 
 ## Emergency Procedures
 
@@ -202,6 +207,3 @@ A task is complete when:
 4. Test
 5. Deploy
 6. Document
-
-## Deployment Workflow
-(Adapt to use `jj` for merging/tagging if applicable, or git commands if interacting with remotes, though `jj git push` works)
