@@ -1,7 +1,7 @@
 # Plan: Minimalist Blog Refactor
 
 ## Phase 1: Configuration & Cleanup
-- [ ] Task: Remove Plugins and Theme from Config
+- [x] Task: Remove Plugins and Theme from Config 942e340
     - [ ] Subtask: Edit `_config.yml` to remove `theme: jekyll-theme-primer`.
     - [ ] Subtask: Edit `_config.yml` to remove `plugins` section (`jekyll-feed`, `jekyll-seo-tag`).
 - [ ] Task: Conductor - User Manual Verification 'Configuration & Cleanup' (Protocol in workflow.md)
