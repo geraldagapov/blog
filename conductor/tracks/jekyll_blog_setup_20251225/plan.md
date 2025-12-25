@@ -16,9 +16,9 @@
 - [x] Task: Create Home Page 72d1fe2
     - [x] Subtask: Create `index.md` using the default layout.
     - [x] Subtask: Add Liquid loop to display a list of posts.
-- [ ] Task: Create About Page
-    - [ ] Subtask: Create `about.md` using the page layout (or default).
-    - [ ] Subtask: Add content describing the blog.
+- [x] Task: Create About Page b8d5a3e
+    - [x] Subtask: Create `about.md` using the page layout (or default).
+    - [x] Subtask: Add content describing the blog.
 - [ ] Task: Create Post Layout
     - [ ] Subtask: Create `_layouts/post.html` for individual articles.
 - [ ] Task: Conductor - User Manual Verification 'Content Pages' (Protocol in workflow.md)
