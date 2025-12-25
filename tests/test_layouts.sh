@@ -15,7 +15,7 @@ if [ ! -f "_includes/footer.html" ]; then
   echo "FAIL: _includes/footer.html not found"
   exit 1
 fi
-if ! grep -q "<footer>" "_includes/footer.html"; then
+if ! grep -q "</footer>" "_includes/footer.html"; then
   echo "FAIL: _includes/footer.html missing <footer>"
   exit 1
 fi
@@ -35,6 +35,27 @@ if ! grep -q "{% include footer.html %}" "_layouts/default.html"; then
 fi
 if ! grep -q "{{ content }}" "_layouts/default.html"; then
   echo "FAIL: _layouts/default.html missing content injection"
+  exit 1
+fi
+
+# Minimalist Refactor Checks for default.html
+if grep -q "{% seo %}" "_layouts/default.html"; then
+  echo "FAIL: _layouts/default.html should not use jekyll-seo-tag"
+  exit 1
+fi
+
+if ! grep -q "<title>.*{{ site.title }}.*</title>" "_layouts/default.html"; then
+  echo "FAIL: _layouts/default.html missing manual title tag"
+  exit 1
+fi
+
+if ! grep -q "<meta name=\"description\"" "_layouts/default.html"; then
+  echo "FAIL: _layouts/default.html missing manual description tag"
+  exit 1
+fi
+
+if ! grep -q "assets/css/style.css" "_layouts/default.html"; then
+  echo "FAIL: _layouts/default.html missing link to style.css"
   exit 1
 fi
 
