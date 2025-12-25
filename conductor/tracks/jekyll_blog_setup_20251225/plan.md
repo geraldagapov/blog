@@ -21,7 +21,7 @@
     - [x] Subtask: Add content describing the blog.
 - [x] Task: Create Post Layout 65f2b9b
     - [x] Subtask: Create `_layouts/post.html` for individual articles.
-- [ ] Task: Conductor - User Manual Verification 'Content Pages' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Content Pages' (Protocol in workflow.md) [checkpoint: 5ba9e18]
 
 ## Phase 3: Final Verification
 - [ ] Task: Local Build Test
