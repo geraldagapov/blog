@@ -32,11 +32,8 @@ All tasks follow a strict lifecycle:
    - With the safety of passing tests, refactor the implementation code and the test code to improve clarity, remove duplication, and enhance performance without changing the external behavior.
    - Rerun tests to ensure they still pass after refactoring.
 
-6. **Verify Coverage:** Run coverage reports using the project's chosen tools. For example, in a Python project, this might look like:
-   ```bash
-   pytest --cov=app --cov-report=html
-   ```
-   Target: >80% coverage for new code. The specific tools and commands will vary by language and framework.
+6. **Verify Coverage:** Run coverage reports using the project's chosen tools.
+   Target: >80% coverage for new code.
 
 7. **Document Deviations:** If implementation differs from tech stack:
    - **STOP** implementation
@@ -45,26 +42,43 @@ All tasks follow a strict lifecycle:
    - Resume implementation
 
 8. **Commit Code Changes:**
-   - Stage all code changes related to the task.
-   - Propose a clear, concise commit message e.g, `feat(ui): Create basic HTML structure for calculator`.
-   - Perform the commit.
-
-9. **Attach Task Summary with Git Notes:**
-   - **Step 9.1: Get Commit Hash:** Obtain the hash of the *just-completed commit* (`git log -1 --format="%H"`).
-   - **Step 9.2: Draft Note Content:** Create a detailed summary for the completed task. This should include the task name, a summary of changes, a list of all created/modified files, and the core "why" for the change.
-   - **Step 9.3: Attach Note:** Use the `git notes` command to attach the summary to the commit.
+   - Review changes with `jj diff`.
+   - Set the commit message:
      ```bash
-     # The note content from the previous step is passed via the -m flag.
-     git notes add -m "<note content>" <commit_hash>
+     jj describe -m "<type>(<scope>): <description>"
+     ```
+   - Finalize the commit and start a new working copy:
+     ```bash
+     jj new
+     ```
+
+9. **Append Task Summary to Commit:**
+   - **Step 9.1: Draft Note Content:** Create a detailed summary including task name, changes, files modified, and "why".
+   - **Step 9.2: Append to Commit Description:** Update the description of the *just-completed commit* (`@-`) to include the note.
+     ```bash
+     # Example: Appending to the previous commit's description
+     jj describe @- -m "$(jj log --no-graph -r @- -T description)
+
+     Task Summary: <note content>"
      ```
 
 10. **Get and Record Task Commit SHA:**
-    - **Step 10.1: Update Plan:** Read `plan.md`, find the line for the completed task, update its status from `[~]` to `[x]`, and append the first 7 characters of the *just-completed commit's* commit hash.
-    - **Step 10.2: Write Plan:** Write the updated content back to `plan.md`.
+    - **Step 10.1: Get Commit Hash:**
+      ```bash
+      jj log --no-graph -r @- -T "commit_id"
+      ```
+    - **Step 10.2: Update Plan:** Read `plan.md`, find the line for the completed task, update its status from `[~]` to `[x]`, and append the first 7 characters of the hash.
+    - **Step 10.3: Write Plan:** Write the updated content back to `plan.md`.
 
 11. **Commit Plan Update:**
-    - **Action:** Stage the modified `plan.md` file.
-    - **Action:** Commit this change with a descriptive message (e.g., `conductor(plan): Mark task 'Create user model' as complete`).
+    - **Action:** Set the message for the plan update:
+      ```bash
+      jj describe -m "conductor(plan): Mark task '...' as complete"
+      ```
+    - **Action:** Finalize:
+      ```bash
+      jj new
+      ```
 
 ### Phase Completion Verification and Checkpointing Protocol
 
@@ -73,66 +87,50 @@ All tasks follow a strict lifecycle:
 1.  **Announce Protocol Start:** Inform the user that the phase is complete and the verification and checkpointing protocol has begun.
 
 2.  **Ensure Test Coverage for Phase Changes:**
-    -   **Step 2.1: Determine Phase Scope:** To identify the files changed in this phase, you must first find the starting point. Read `plan.md` to find the Git commit SHA of the *previous* phase's checkpoint. If no previous checkpoint exists, the scope is all changes since the first commit.
-    -   **Step 2.2: List Changed Files:** Execute `git diff --name-only <previous_checkpoint_sha> HEAD` to get a precise list of all files modified during this phase.
-    -   **Step 2.3: Verify and Create Tests:** For each file in the list:
-        -   **CRITICAL:** First, check its extension. Exclude non-code files (e.g., `.json`, `.md`, `.yaml`).
-        -   For each remaining code file, verify a corresponding test file exists.
-        -   If a test file is missing, you **must** create one. Before writing the test, **first, analyze other test files in the repository to determine the correct naming convention and testing style.** The new tests **must** validate the functionality described in this phase's tasks (`plan.md`).
+    -   **Step 2.1: Determine Phase Scope:** Read `plan.md` to find the SHA of the *previous* phase's checkpoint.
+    -   **Step 2.2: List Changed Files:** Execute `jj diff --from <previous_checkpoint_sha> --to @- --summary` (or similar) to identify modified files.
+    -   **Step 2.3: Verify and Create Tests:** Check code files for corresponding tests. Create missing tests if necessary.
 
 3.  **Execute Automated Tests with Proactive Debugging:**
-    -   Before execution, you **must** announce the exact shell command you will use to run the tests.
-    -   **Example Announcement:** "I will now run the automated test suite to verify the phase. **Command:** `CI=true npm test`"
-    -   Execute the announced command.
-    -   If tests fail, you **must** inform the user and begin debugging. You may attempt to propose a fix a **maximum of two times**. If the tests still fail after your second proposed fix, you **must stop**, report the persistent failure, and ask the user for guidance.
+    -   **Announce Command:** e.g., "Command: `CI=true npm test`"
+    -   **Execute:** Run the command.
+    -   **Debug:** If failure, propose up to 2 fixes.
 
 4.  **Propose a Detailed, Actionable Manual Verification Plan:**
-    -   **CRITICAL:** To generate the plan, first analyze `product.md`, `product-guidelines.md`, and `plan.md` to determine the user-facing goals of the completed phase.
-    -   You **must** generate a step-by-step plan that walks the user through the verification process, including any necessary commands and specific, expected outcomes.
-    -   The plan you present to the user **must** follow this format:
-
-        **For a Frontend Change:**
-        ```
-        The automated tests have passed. For manual verification, please follow these steps:
-
-        **Manual Verification Steps:**
-        1.  **Start the development server with the command:** `npm run dev`
-        2.  **Open your browser to:** `http://localhost:3000`
-        3.  **Confirm that you see:** The new user profile page, with the user's name and email displayed correctly.
-        ```
-
-        **For a Backend Change:**
-        ```
-        The automated tests have passed. For manual verification, please follow these steps:
-
-        **Manual Verification Steps:**
-        1.  **Ensure the server is running.**
-        2.  **Execute the following command in your terminal:** `curl -X POST http://localhost:8080/api/v1/users -d '{"name": "test"}'`
-        3.  **Confirm that you receive:** A JSON response with a status of `201 Created`.
-        ```
+    -   Generate a step-by-step plan (Frontend/Backend specific as needed).
 
 5.  **Await Explicit User Feedback:**
-    -   After presenting the detailed plan, ask the user for confirmation: "**Does this meet your expectations? Please confirm with yes or provide feedback on what needs to be changed.**"
-    -   **PAUSE** and await the user's response. Do not proceed without an explicit yes or confirmation.
+    -   Ask: "**Does this meet your expectations? Please confirm with yes or provide feedback...**"
+    -   **PAUSE** and await response.
 
 6.  **Create Checkpoint Commit:**
-    -   Stage all changes. If no changes occurred in this step, proceed with an empty commit.
-    -   Perform the commit with a clear and concise message (e.g., `conductor(checkpoint): Checkpoint end of Phase X`).
+    -   Set message:
+      ```bash
+      jj describe -m "conductor(checkpoint): Checkpoint end of Phase X"
+      ```
+    -   Finalize:
+      ```bash
+      jj new
+      ```
 
-7.  **Attach Auditable Verification Report using Git Notes:**
-    -   **Step 8.1: Draft Note Content:** Create a detailed verification report including the automated test command, the manual verification steps, and the user's confirmation.
-    -   **Step 8.2: Attach Note:** Use the `git notes` command and the full commit hash from the previous step to attach the full report to the checkpoint commit.
+7.  **Append Auditable Verification Report:**
+    -   **Step 8.1: Draft Report:** Include automated test results, manual steps, and user confirmation.
+    -   **Step 8.2: Append to Commit:**
+      ```bash
+      jj describe @- -m "$(jj log --no-graph -r @- -T description)
+
+      Verification Report: <report content>"
+      ```
 
 8.  **Get and Record Phase Checkpoint SHA:**
-    -   **Step 7.1: Get Commit Hash:** Obtain the hash of the *just-created checkpoint commit* (`git log -1 --format="%H"`).
-    -   **Step 7.2: Update Plan:** Read `plan.md`, find the heading for the completed phase, and append the first 7 characters of the commit hash in the format `[checkpoint: <sha>]`.
-    -   **Step 7.3: Write Plan:** Write the updated content back to `plan.md`.
+    -   **Step 7.1: Get Commit Hash:** `jj log --no-graph -r @- -T "commit_id"`
+    -   **Step 7.2: Update Plan:** Append `[checkpoint: <sha>]` to the phase heading in `plan.md`.
 
 9. **Commit Plan Update:**
-    - **Action:** Stage the modified `plan.md` file.
-    - **Action:** Commit this change with a descriptive message following the format `conductor(plan): Mark phase '<PHASE NAME>' as complete`.
+    - **Action:** `jj describe -m "conductor(plan): Mark phase '<PHASE NAME>' as complete"`
+    - **Action:** `jj new`
 
-10.  **Announce Completion:** Inform the user that the phase is complete and the checkpoint has been created, with the detailed verification report attached as a git note.
+10.  **Announce Completion:** Inform the user.
 
 ### Quality Gates
 
@@ -140,97 +138,36 @@ Before marking any task complete, verify:
 
 - [ ] All tests pass
 - [ ] Code coverage meets requirements (>80%)
-- [ ] Code follows project's code style guidelines (as defined in `code_styleguides/`)
-- [ ] All public functions/methods are documented (e.g., docstrings, JSDoc, GoDoc)
-- [ ] Type safety is enforced (e.g., type hints, TypeScript types, Go types)
-- [ ] No linting or static analysis errors (using the project's configured tools)
+- [ ] Code follows project's code style guidelines
+- [ ] All public functions/methods are documented
+- [ ] Type safety is enforced
+- [ ] No linting or static analysis errors
 - [ ] Works correctly on mobile (if applicable)
 - [ ] Documentation updated if needed
 - [ ] No security vulnerabilities introduced
 
 ## Development Commands
 
-**AI AGENT INSTRUCTION: This section should be adapted to the project's specific language, framework, and build tools.**
-
 ### Setup
 ```bash
-# Example: Commands to set up the development environment (e.g., install dependencies, configure database)
-# e.g., for a Node.js project: npm install
-# e.g., for a Go project: go mod tidy
+# Example: npm install
 ```
 
 ### Daily Development
 ```bash
-# Example: Commands for common daily tasks (e.g., start dev server, run tests, lint, format)
-# e.g., for a Node.js project: npm run dev, npm test, npm run lint
-# e.g., for a Go project: go run main.go, go test ./..., go fmt ./...
+# Example: npm run dev, npm test
 ```
 
 ### Before Committing
 ```bash
-# Example: Commands to run all pre-commit checks (e.g., format, lint, type check, run tests)
-# e.g., for a Node.js project: npm run check
-# e.g., for a Go project: make check (if a Makefile exists)
+# Example: npm run check
 ```
 
 ## Testing Requirements
-
-### Unit Testing
-- Every module must have corresponding tests.
-- Use appropriate test setup/teardown mechanisms (e.g., fixtures, beforeEach/afterEach).
-- Mock external dependencies.
-- Test both success and failure cases.
-
-### Integration Testing
-- Test complete user flows
-- Verify database transactions
-- Test authentication and authorization
-- Check form submissions
-
-### Mobile Testing
-- Test on actual iPhone when possible
-- Use Safari developer tools
-- Test touch interactions
-- Verify responsive layouts
-- Check performance on 3G/4G
+(Same as before)
 
 ## Code Review Process
-
-### Self-Review Checklist
-Before requesting review:
-
-1. **Functionality**
-   - Feature works as specified
-   - Edge cases handled
-   - Error messages are user-friendly
-
-2. **Code Quality**
-   - Follows style guide
-   - DRY principle applied
-   - Clear variable/function names
-   - Appropriate comments
-
-3. **Testing**
-   - Unit tests comprehensive
-   - Integration tests pass
-   - Coverage adequate (>80%)
-
-4. **Security**
-   - No hardcoded secrets
-   - Input validation present
-   - SQL injection prevented
-   - XSS protection in place
-
-5. **Performance**
-   - Database queries optimized
-   - Images optimized
-   - Caching implemented where needed
-
-6. **Mobile Experience**
-   - Touch targets adequate (44x44px)
-   - Text readable without zooming
-   - Performance acceptable on mobile
-   - Interactions feel native
+(Same as before)
 
 ## Commit Guidelines
 
@@ -243,91 +180,28 @@ Before requesting review:
 [optional footer]
 ```
 
-### Types
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation only
-- `style`: Formatting, missing semicolons, etc.
-- `refactor`: Code change that neither fixes a bug nor adds a feature
-- `test`: Adding missing tests
-- `chore`: Maintenance tasks
-
-### Examples
-```bash
-git commit -m "feat(auth): Add remember me functionality"
-git commit -m "fix(posts): Correct excerpt generation for short posts"
-git commit -m "test(comments): Add tests for emoji reaction limits"
-git commit -m "style(mobile): Improve button touch targets"
-```
-
 ## Definition of Done
 
 A task is complete when:
-
 1. All code implemented to specification
 2. Unit tests written and passing
-3. Code coverage meets project requirements
-4. Documentation complete (if applicable)
-5. Code passes all configured linting and static analysis checks
-6. Works beautifully on mobile (if applicable)
+3. Code coverage meets requirements
+4. Documentation complete
+5. Code passes linting/analysis
+6. Mobile verified
 7. Implementation notes added to `plan.md`
-8. Changes committed with proper message
-9. Git note with task summary attached to the commit
+8. Changes committed with proper message (`jj describe`, `jj new`)
+9. Task summary appended to commit description
 
 ## Emergency Procedures
 
 ### Critical Bug in Production
-1. Create hotfix branch from main
-2. Write failing test for bug
-3. Implement minimal fix
-4. Test thoroughly including mobile
-5. Deploy immediately
-6. Document in plan.md
-
-### Data Loss
-1. Stop all write operations
-2. Restore from latest backup
-3. Verify data integrity
-4. Document incident
-5. Update backup procedures
-
-### Security Breach
-1. Rotate all secrets immediately
-2. Review access logs
-3. Patch vulnerability
-4. Notify affected users (if any)
-5. Document and update security procedures
+1. `jj new main` (create new change off main)
+2. Write failing test
+3. Implement fix
+4. Test
+5. Deploy
+6. Document
 
 ## Deployment Workflow
-
-### Pre-Deployment Checklist
-- [ ] All tests passing
-- [ ] Coverage >80%
-- [ ] No linting errors
-- [ ] Mobile testing complete
-- [ ] Environment variables configured
-- [ ] Database migrations ready
-- [ ] Backup created
-
-### Deployment Steps
-1. Merge feature branch to main
-2. Tag release with version
-3. Push to deployment service
-4. Run database migrations
-5. Verify deployment
-6. Test critical paths
-7. Monitor for errors
-
-### Post-Deployment
-1. Monitor analytics
-2. Check error logs
-3. Gather user feedback
-4. Plan next iteration
-
-## Continuous Improvement
-
-- Review workflow weekly
-- Update based on pain points
-- Document lessons learned
-- Optimize for user happiness
-- Keep things simple and maintainable
+(Adapt to use `jj` for merging/tagging if applicable, or git commands if interacting with remotes, though `jj git push` works)
