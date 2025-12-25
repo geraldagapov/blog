@@ -9,5 +9,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-## [ ] Track: Change my blog to be very minimal don't use external dependencies (themes, plugins, etc). The setup should be as minimal as possible.
+## [~] Track: Change my blog to be very minimal don't use external dependencies (themes, plugins, etc). The setup should be as minimal as possible.
 *Link: [./conductor/tracks/minimalist_refactor_20251225/](./conductor/tracks/minimalist_refactor_20251225/)*
