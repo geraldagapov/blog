@@ -13,9 +13,9 @@
 - [x] Task: Conductor - User Manual Verification 'Configuration & Structure' (Protocol in workflow.md) [checkpoint: a92d3b7]
 
 ## Phase 2: Content Pages
-- [ ] Task: Create Home Page
-    - [ ] Subtask: Create `index.md` using the default layout.
-    - [ ] Subtask: Add Liquid loop to display a list of posts.
+- [x] Task: Create Home Page 72d1fe2
+    - [x] Subtask: Create `index.md` using the default layout.
+    - [x] Subtask: Add Liquid loop to display a list of posts.
 - [ ] Task: Create About Page
     - [ ] Subtask: Create `about.md` using the page layout (or default).
     - [ ] Subtask: Add content describing the blog.
