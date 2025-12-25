@@ -21,4 +21,4 @@
 ## Phase 3: Verification
 - [x] Task: Clean Build Verification 13bc244
     - [ ] Subtask: Run a build/test cycle to ensure the site renders correctly without the removed dependencies.
-- [ ] Task: Conductor - User Manual Verification 'Verification' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Verification' (Protocol in workflow.md) [checkpoint: a5fd970]
