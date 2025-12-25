@@ -1,7 +1,7 @@
 title: "My Tech Blog"
 description: "Insights on engineering practices and management."
-url: "https://<USERNAME>.github.io"
-baseurl: "/<REPOSITORY>"
+url: "https://gagapov.github.io"
+baseurl: "/blog"
 theme: jekyll-theme-primer # Optional: using a default theme to start, can be changed later
 plugins:
   - jekyll-feed
