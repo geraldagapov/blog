@@ -38,6 +38,28 @@ if ! grep -q "{{ content }}" "_layouts/default.html"; then
   exit 1
 fi
 
+# Test for post.html
+if [ ! -f "_layouts/post.html" ]; then
+  echo "FAIL: _layouts/post.html not found"
+  exit 1
+fi
+if ! grep -q "layout: default" "_layouts/post.html"; then
+  echo "FAIL: _layouts/post.html missing default layout"
+  exit 1
+fi
+if ! grep -q "{{ page.title }}" "_layouts/post.html"; then
+  echo "FAIL: _layouts/post.html missing page title"
+  exit 1
+fi
+if ! grep -q "{{ page.date" "_layouts/post.html"; then
+  echo "FAIL: _layouts/post.html missing page date"
+  exit 1
+fi
+if ! grep -q "{{ content }}" "_layouts/post.html"; then
+  echo "FAIL: _layouts/post.html missing content"
+  exit 1
+fi
+
 # Test for style.css
 if [ ! -f "assets/css/style.css" ]; then
   echo "FAIL: assets/css/style.css not found"
