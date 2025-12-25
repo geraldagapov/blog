@@ -5,11 +5,11 @@
     - [x] Subtask: Create `_config.yml` with basic GitHub Pages settings (title, description, url, baseurl).
     - [x] Subtask: Create `Gemfile` if needed for local development (optional but good practice).
     - [x] Subtask: Create directories: `_layouts`, `_includes`, `_posts`, `assets/css`.
-- [ ] Task: Create Base Layouts & Includes
-    - [ ] Subtask: Create `_includes/header.html` with navigation links.
-    - [ ] Subtask: Create `_includes/footer.html`.
-    - [ ] Subtask: Create `_layouts/default.html` incorporating header and footer.
-    - [ ] Subtask: Create `assets/css/style.css` with minimalist styling.
+- [x] Task: Create Base Layouts & Includes a4041e1
+    - [x] Subtask: Create `_includes/header.html` with navigation links.
+    - [x] Subtask: Create `_includes/footer.html`.
+    - [x] Subtask: Create `_layouts/default.html` incorporating header and footer.
+    - [x] Subtask: Create `assets/css/style.css` with minimalist styling.
 - [ ] Task: Conductor - User Manual Verification 'Configuration & Structure' (Protocol in workflow.md)
 
 ## Phase 2: Content Pages
