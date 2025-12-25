@@ -10,7 +10,7 @@
     - [x] Subtask: Create `_includes/footer.html`.
     - [x] Subtask: Create `_layouts/default.html` incorporating header and footer.
     - [x] Subtask: Create `assets/css/style.css` with minimalist styling.
-- [ ] Task: Conductor - User Manual Verification 'Configuration & Structure' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Configuration & Structure' (Protocol in workflow.md) [checkpoint: a92d3b7]
 
 ## Phase 2: Content Pages
 - [ ] Task: Create Home Page
