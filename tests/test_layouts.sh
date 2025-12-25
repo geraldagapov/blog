@@ -90,6 +90,10 @@ if [ ! -f "assets/css/style.css" ]; then
   echo "FAIL: assets/css/style.css not found"
   exit 1
 fi
+if [ ! -s "assets/css/style.css" ]; then
+  echo "FAIL: assets/css/style.css is empty"
+  exit 1
+fi
 
 echo "PASS: Layouts and Includes verified"
 exit 0
