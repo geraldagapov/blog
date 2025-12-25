@@ -1,10 +1,10 @@
 # Plan: Basic Jekyll Blog Setup
 
 ## Phase 1: Configuration & Structure
-- [ ] Task: Initialize Jekyll structure
-    - [ ] Subtask: Create `_config.yml` with basic GitHub Pages settings (title, description, url, baseurl).
-    - [ ] Subtask: Create `Gemfile` if needed for local development (optional but good practice).
-    - [ ] Subtask: Create directories: `_layouts`, `_includes`, `_posts`, `assets/css`.
+- [x] Task: Initialize Jekyll structure e1f0b16
+    - [x] Subtask: Create `_config.yml` with basic GitHub Pages settings (title, description, url, baseurl).
+    - [x] Subtask: Create `Gemfile` if needed for local development (optional but good practice).
+    - [x] Subtask: Create directories: `_layouts`, `_includes`, `_posts`, `assets/css`.
 - [ ] Task: Create Base Layouts & Includes
     - [ ] Subtask: Create `_includes/header.html` with navigation links.
     - [ ] Subtask: Create `_includes/footer.html`.
