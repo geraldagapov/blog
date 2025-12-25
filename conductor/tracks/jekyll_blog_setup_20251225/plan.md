@@ -1,0 +1,29 @@
+# Plan: Basic Jekyll Blog Setup
+
+## Phase 1: Configuration & Structure
+- [ ] Task: Initialize Jekyll structure
+    - [ ] Subtask: Create `_config.yml` with basic GitHub Pages settings (title, description, url, baseurl).
+    - [ ] Subtask: Create `Gemfile` if needed for local development (optional but good practice).
+    - [ ] Subtask: Create directories: `_layouts`, `_includes`, `_posts`, `assets/css`.
+- [ ] Task: Create Base Layouts & Includes
+    - [ ] Subtask: Create `_includes/header.html` with navigation links.
+    - [ ] Subtask: Create `_includes/footer.html`.
+    - [ ] Subtask: Create `_layouts/default.html` incorporating header and footer.
+    - [ ] Subtask: Create `assets/css/style.css` with minimalist styling.
+- [ ] Task: Conductor - User Manual Verification 'Configuration & Structure' (Protocol in workflow.md)
+
+## Phase 2: Content Pages
+- [ ] Task: Create Home Page
+    - [ ] Subtask: Create `index.md` using the default layout.
+    - [ ] Subtask: Add Liquid loop to display a list of posts.
+- [ ] Task: Create About Page
+    - [ ] Subtask: Create `about.md` using the page layout (or default).
+    - [ ] Subtask: Add content describing the blog.
+- [ ] Task: Create Post Layout
+    - [ ] Subtask: Create `_layouts/post.html` for individual articles.
+- [ ] Task: Conductor - User Manual Verification 'Content Pages' (Protocol in workflow.md)
+
+## Phase 3: Final Verification
+- [ ] Task: Local Build Test
+    - [ ] Subtask: Run `jekyll build` or `bundle exec jekyll serve` to verify the site generates correctly.
+- [ ] Task: Conductor - User Manual Verification 'Final Verification' (Protocol in workflow.md)
