@@ -14,7 +14,7 @@
 - [x] Task: Simplify Content Layouts 22c4829
     - [ ] Subtask: Review and simplify `_layouts/post.html`.
     - [ ] Subtask: Review and simplify `_layouts/page.html` (if exists, or verify usage in `about.md`).
-- [ ] Task: Refine Custom CSS
+- [x] Task: Refine Custom CSS f183d39
     - [ ] Subtask: Verify `assets/css/style.css` provides all necessary styling for the stripped-down layouts.
 - [ ] Task: Conductor - User Manual Verification 'Layout & Asset Refactoring' (Protocol in workflow.md)
 
