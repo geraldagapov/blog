@@ -80,6 +80,10 @@ if ! grep -q "{{ content }}" "_layouts/post.html"; then
   echo "FAIL: _layouts/post.html missing content"
   exit 1
 fi
+if ! grep -q "<article>" "_layouts/post.html"; then
+  echo "FAIL: _layouts/post.html should use <article>"
+  exit 1
+fi
 
 # Test for style.css
 if [ ! -f "assets/css/style.css" ]; then
