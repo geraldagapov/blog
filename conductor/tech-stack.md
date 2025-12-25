@@ -1,5 +1,8 @@
 # Technology Stack
 
+## Version Control
+- **JJ (Jujutsu):** The project uses JJ for version control.
+
 ## Static Site Generator
 - **Jekyll (GitHub Pages flavor):** The project uses Jekyll configured specifically for GitHub Pages. This means the `_site` directory should not be committed, as GitHub handles the build process automatically.
 
