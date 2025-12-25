@@ -1,6 +1,6 @@
-title: "My Tech Blog"
+title: "Gerald writes"
 description: "Insights on engineering practices and management."
-url: "https://gagapov.github.io"
+url: "https://geraldagapov.github.io"
 baseurl: "/blog"
 exclude:
   - node_modules

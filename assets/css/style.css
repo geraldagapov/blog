@@ -13,6 +13,20 @@ header {
   padding-bottom: 1rem;
 }
 
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-title {
+  font-weight: bold;
+}
+
+.site-title:hover {
+  text-decoration: none;
+}
+
 nav a {
   margin-right: 1rem;
   text-decoration: none;

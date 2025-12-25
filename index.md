@@ -3,15 +3,8 @@ layout: default
 title: Home
 ---
 
-<h1>Welcome to {{ site.title }}</h1>
-<p>{{ site.description }}</p>
+<h1>Hi, I'm Gerald</h1>
+<p>Here I share most recent tech (or adjacent) reads that got me thinking. It's also available as a [2-9]-weekly newsletter.</p>
 
-<h2>Latest Posts</h2>
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      - {{ post.date | date_to_string }}
-    </li>
-  {% endfor %}
-</ul>
+{% include latest_top_of_mind.md %}
+

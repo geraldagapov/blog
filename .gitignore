@@ -7,3 +7,7 @@ _site/
 # Locks for Gemfile
 Gemfile.lock
 
+# Local installation of jekyll and runfiles
+.bundle/
+vendor/
+
