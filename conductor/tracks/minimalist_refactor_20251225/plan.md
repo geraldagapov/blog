@@ -4,7 +4,7 @@
 - [x] Task: Remove Plugins and Theme from Config 942e340
     - [ ] Subtask: Edit `_config.yml` to remove `theme: jekyll-theme-primer`.
     - [ ] Subtask: Edit `_config.yml` to remove `plugins` section (`jekyll-feed`, `jekyll-seo-tag`).
-- [ ] Task: Conductor - User Manual Verification 'Configuration & Cleanup' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Configuration & Cleanup' (Protocol in workflow.md) [checkpoint: e598eac]
 
 ## Phase 2: Layout & Asset Refactoring
 - [ ] Task: Update Default Layout
