@@ -16,7 +16,7 @@
     - [ ] Subtask: Review and simplify `_layouts/page.html` (if exists, or verify usage in `about.md`).
 - [x] Task: Refine Custom CSS f183d39
     - [ ] Subtask: Verify `assets/css/style.css` provides all necessary styling for the stripped-down layouts.
-- [ ] Task: Conductor - User Manual Verification 'Layout & Asset Refactoring' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Layout & Asset Refactoring' (Protocol in workflow.md) [checkpoint: 1909766]
 
 ## Phase 3: Verification
 - [ ] Task: Clean Build Verification
