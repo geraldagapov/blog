@@ -1,4 +1,5 @@
 # Locally built site
 _site/
 
-
+# Locks for Gemfile
+Gemfile.lock
